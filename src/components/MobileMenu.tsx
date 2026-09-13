@@ -2,23 +2,36 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  Info,
+  Package,
+  Factory,
+  Globe2,
+  Phone,
+  ArrowRight,
+  ArrowLeft,
+} from "lucide-react";
 import type { Dictionary, Locale } from "@/content/types";
 import { LocaleSwitch } from "./LocaleSwitch";
+import { FlowingLine } from "./decor/LineArt";
 
 export function MobileMenu({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const Arrow = locale === "ar" ? ArrowLeft : ArrowRight;
 
   const links = [
-    { href: `/${locale}`, label: dict.nav.home },
-    { href: `/${locale}#about`, label: dict.nav.about },
-    { href: `/${locale}#materials`, label: dict.nav.materials },
-    { href: `/${locale}#industries`, label: dict.nav.industries },
-    { href: `/${locale}#sourcing`, label: dict.nav.sourcing },
-    { href: `/${locale}#contact`, label: dict.nav.contact },
+    { href: `/${locale}`, label: dict.nav.home, icon: Home },
+    { href: `/${locale}#about`, label: dict.nav.about, icon: Info },
+    { href: `/${locale}#materials`, label: dict.nav.materials, icon: Package },
+    { href: `/${locale}#sourcing`, label: dict.nav.sourcing, icon: Globe2 },
+    { href: `/${locale}#industries`, label: dict.nav.industries, icon: Factory },
+    { href: `/${locale}#contact`, label: dict.nav.contact, icon: Phone },
   ];
 
   function close() {
@@ -81,10 +94,11 @@ export function MobileMenu({ dict, locale }: { dict: Dictionary; locale: Locale 
           aria-modal="true"
           aria-label={dict.nav.menu}
           className="fixed inset-0 z-[60] flex h-dvh flex-col bg-pearl"
-          style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)" }}
+          style={{ paddingTop: "env(safe-area-inset-top)" }}
         >
-          <div className="container-brand flex items-center justify-between py-5">
-            <span className="font-display text-lg text-champagne-deep">
+          {/* header */}
+          <div className="container-brand flex shrink-0 items-center justify-between border-b border-border-warm py-3">
+            <span className="font-display text-lg tracking-wide text-champagne-deep">
               {dict.nav.menu}
             </span>
             <button
@@ -92,36 +106,58 @@ export function MobileMenu({ dict, locale }: { dict: Dictionary; locale: Locale 
               type="button"
               onClick={close}
               aria-label={dict.nav.closeMenu}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border-warm text-charcoal"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-border-warm text-charcoal transition-colors active:border-champagne-deep active:text-champagne-deep"
             >
               <X size={20} aria-hidden="true" />
             </button>
           </div>
 
+          {/* nav — the only scrollable region, so header and bottom actions stay put */}
           <nav
-            className="container-brand flex flex-1 flex-col gap-1 overflow-y-auto py-4"
+            className="container-brand flex min-h-0 flex-1 flex-col overflow-y-auto"
             aria-label={dict.nav.menu}
           >
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={close}
-                className="border-b border-border-warm py-4 text-lg text-charcoal"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={close}
+                  className="flex min-h-[52px] items-center gap-3.5 border-b border-border-warm py-3 text-base font-medium text-charcoal transition-colors active:text-champagne-deep"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-champagne/10 text-champagne-deep">
+                    <Icon size={16} aria-hidden="true" />
+                  </span>
+                  {link.label}
+                </Link>
+              );
+            })}
+
+            {/* fills any leftover height on taller screens with a brand motif instead of dead space */}
+            <div aria-hidden="true" className="flex flex-1 items-center justify-center">
+              <FlowingLine className="h-14 w-2/3 text-champagne opacity-[0.12]" />
+            </div>
           </nav>
 
-          <div className="container-brand flex flex-col gap-4 border-t border-border-warm py-6">
-            <LocaleSwitch locale={locale} />
+          {/* bottom actions — always visible, never pushed off-screen */}
+          <div
+            className="container-brand shrink-0 border-t border-border-warm pt-4"
+            style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1rem)" }}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-xs font-semibold tracking-[0.14em] text-muted uppercase">
+                {dict.nav.language}
+              </span>
+              <LocaleSwitch locale={locale} />
+            </div>
             <Link
               href={`/${locale}#quote`}
               onClick={close}
-              className="rounded-full bg-champagne px-6 py-3 text-center font-medium text-white"
+              className="mt-3 flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-champagne px-6 text-sm font-semibold text-white transition-colors active:bg-champagne-deep"
             >
               {dict.nav.cta}
+              <Arrow size={16} aria-hidden="true" />
             </Link>
           </div>
         </div>

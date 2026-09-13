@@ -82,7 +82,8 @@ export async function renderOgImage(locale: Locale) {
           fontFamily: c.bodyFont,
         }}
       >
-        {/* decorative glows */}
+        {/* decorative glows — fixed physical positions regardless of locale so the
+            logo's crop-safe zone (left/left-center) never shifts */}
         <div
           style={{
             position: "absolute",
@@ -92,7 +93,7 @@ export async function renderOgImage(locale: Locale) {
             background: "#ddc9a3",
             opacity: 0.28,
             top: -220,
-            [isRtl ? "left" : "right"]: -160,
+            right: -160,
             display: "flex",
           }}
         />
@@ -105,7 +106,7 @@ export async function renderOgImage(locale: Locale) {
             background: "#b08d5c",
             opacity: 0.12,
             bottom: -180,
-            [isRtl ? "right" : "left"]: -120,
+            left: -120,
             display: "flex",
           }}
         />
@@ -114,31 +115,33 @@ export async function renderOgImage(locale: Locale) {
           style={{
             position: "relative",
             display: "flex",
-            flexDirection: isRtl ? "row-reverse" : "row",
+            flexDirection: "row",
             alignItems: "center",
             width: "100%",
             height: "100%",
-            padding: "0 88px",
-            gap: 64,
+            padding: "0 76px 0 210px",
+            gap: 48,
           }}
         >
-          {/* logo card */}
+          {/* logo card — always left-of-center: this is the zone that survives
+              WhatsApp's compact compose-preview crop (left-anchored or centered square),
+              kept identical for ar/en since crop-safety is physical, not linguistic */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: 240,
-              height: 240,
+              width: 260,
+              height: 260,
               flexShrink: 0,
-              borderRadius: 32,
+              borderRadius: 34,
               background: "#ffffff",
-              boxShadow: "0 18px 48px rgba(138,109,66,0.22)",
-              border: "1px solid rgba(139,109,66,0.18)",
+              boxShadow: "0 20px 50px -8px rgba(138,109,66,0.32)",
+              border: "1.5px solid rgba(139,109,66,0.28)",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- next/image cannot run inside next/og's ImageResponse renderer */}
-            <img src={logoSrc} alt="" width={196} height={196} style={{ borderRadius: 20 }} />
+            <img src={logoSrc} alt="" width={232} height={232} style={{ borderRadius: 20 }} />
           </div>
 
           {/* text block */}
@@ -154,7 +157,7 @@ export async function renderOgImage(locale: Locale) {
             <div
               style={{
                 fontFamily: c.headingFont,
-                fontSize: 62,
+                fontSize: 56,
                 fontWeight: 700,
                 color: "#262420",
                 lineHeight: 1.15,
@@ -165,9 +168,9 @@ export async function renderOgImage(locale: Locale) {
             </div>
             <div
               style={{
-                marginTop: 22,
+                marginTop: 20,
                 fontFamily: c.bodyFont,
-                fontSize: 34,
+                fontSize: 32,
                 fontWeight: 500,
                 color: "#8a6d42",
                 display: "flex",
@@ -183,7 +186,7 @@ export async function renderOgImage(locale: Locale) {
                 alignItems: "center",
                 gap: 14,
                 fontFamily: c.bodyFont,
-                fontSize: 28,
+                fontSize: 26,
                 fontWeight: 500,
                 color: "#6f6a62",
               }}
@@ -198,11 +201,11 @@ export async function renderOgImage(locale: Locale) {
         <div
           style={{
             position: "absolute",
-            bottom: 40,
-            [isRtl ? "right" : "left"]: 88,
+            bottom: 36,
+            right: 76,
             display: "flex",
             fontFamily: "Body Latin",
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: 500,
             color: "#6f6a62",
             letterSpacing: 1,
