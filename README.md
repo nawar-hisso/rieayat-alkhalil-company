@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rieayat Alkhalil Company — Website
 
-## Getting Started
+Bilingual (Arabic/English) corporate homepage for **Rieayat Alkhalil Company**
+(شركة رعاية الخليل), a plastic raw materials importer/trader based in Erbil, Iraq.
 
-First, run the development server:
+Built with Next.js (App Router), TypeScript and Tailwind CSS v4.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use        # Node 22.x (see .nvmrc) — Tailwind v4 / eslint 9 require it
+npm install
+npm run dev     # http://localhost:3000 -> redirects to /ar
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npm run build   # production build
+npm run start   # serve the production build
+npm run lint    # ESLint
+npx tsc --noEmit   # type check
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| What | Where |
+| --- | --- |
+| Phone numbers, email, WhatsApp number, hours, social/map links | `src/config/company.ts` |
+| Arabic copy | `src/content/ar.ts` |
+| English copy | `src/content/en.ts` |
+| Shared content shape | `src/content/types.ts` |
+| Page sections (Hero, Materials, Contact, etc.) | `src/components/` |
+| Route + per-locale layout (`/ar`, `/en`) | `src/app/[locale]/` |
+| `/` → `/ar` redirect | `next.config.ts` (`redirects()`) |
+| Sitemap / robots | `src/app/sitemap.ts`, `src/app/robots.ts` |
+| Brand assets (logo crops, OG image) | `public/brand/` |
+| Original supplied logo photos (untouched) | `.assets-original/` |
+| Requested-information workbook for the owner | `docs/بيانات-مطلوبة-لموقع-شركة-رعاية-الخليل.xlsx` |
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Production domain is not yet known — set `NEXT_PUBLIC_SITE_URL` before deploying
+(see the fallback/comment in `src/config/company.ts`) so canonical URLs,
+hreflang tags, the sitemap and JSON-LD point at the real domain.

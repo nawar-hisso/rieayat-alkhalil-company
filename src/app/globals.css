@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Derived from the supplied Alkhalil brand artwork */
+  --color-pearl: #f8f6f2;
+  --color-pearl-2: #f1efe9;
+  --color-offwhite: #f2f2f0;
+  --color-beige: #eae3d6;
+  --color-champagne: #b08d5c;
+  --color-champagne-deep: #8a6d42;
+  --color-champagne-light: #ddc9a3;
+  --color-charcoal: #262420;
+  --color-muted: #6f6a62;
+  --color-border-warm: rgba(139, 109, 66, 0.18);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-pearl: var(--color-pearl);
+  --color-pearl-2: var(--color-pearl-2);
+  --color-offwhite: var(--color-offwhite);
+  --color-beige: var(--color-beige);
+  --color-champagne: var(--color-champagne);
+  --color-champagne-deep: var(--color-champagne-deep);
+  --color-champagne-light: var(--color-champagne-light);
+  --color-charcoal: var(--color-charcoal);
+  --color-muted: var(--color-muted);
+  --color-border-warm: var(--color-border-warm);
+
+  --font-display: var(--font-heading);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  border-color: var(--color-border-warm);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-pearl);
+  color: var(--color-charcoal);
+  font-family: var(--font-body), sans-serif;
+}
+
+::selection {
+  background: var(--color-champagne-light);
+  color: var(--color-charcoal);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-champagne-deep);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.font-display {
+  font-family: var(--font-heading), serif;
+}
+
+/* Layered, low-opacity warm surface — the site's "paper" texture cue */
+.brand-surface {
+  background-image:
+    radial-gradient(ellipse 60% 50% at 85% 0%, rgba(176, 141, 92, 0.1), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(176, 141, 92, 0.07), transparent 60%),
+    linear-gradient(180deg, var(--color-pearl), var(--color-pearl-2));
+}
+
+.brand-divider {
+  height: 1px;
+  background: linear-gradient(
+    to var(--divider-dir, right),
+    transparent,
+    var(--color-border-warm) 20%,
+    var(--color-border-warm) 80%,
+    transparent
+  );
+}
+
+[dir="rtl"] .brand-divider {
+  --divider-dir: left;
+}
+
+.container-brand {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-brand {
+    padding-inline: 2rem;
+  }
+}
+
+.input-brand {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border-warm);
+  background: var(--color-pearl-2);
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  color: var(--color-charcoal);
+  transition: border-color 0.15s ease;
+}
+
+.input-brand:focus-visible {
+  border-color: var(--color-champagne);
+}
+
+.input-brand::placeholder {
+  color: var(--color-muted);
 }
