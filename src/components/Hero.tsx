@@ -19,10 +19,8 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           <p className="text-xs font-semibold tracking-[0.18em] text-champagne-deep">
             {dict.hero.eyebrow}
           </p>
-          <h1 className="font-display mt-5 text-4xl leading-[1.15] text-charcoal sm:text-5xl lg:text-[3.4rem]">
-            {dict.hero.heading[0]}
-            <br />
-            {dict.hero.heading[1]}
+          <h1 className="font-display mt-5 text-balance text-4xl leading-[1.15] text-charcoal sm:text-5xl lg:text-[3.4rem]">
+            {dict.hero.heading[0]} {dict.hero.heading[1]}
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             {dict.hero.body}

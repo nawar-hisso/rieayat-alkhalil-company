@@ -69,27 +69,18 @@ export async function generateMetadata({
     description: dict.meta.description,
     alternates: alternates(locale),
     openGraph: {
-      title: dict.meta.title,
-      description: dict.meta.description,
+      title: dict.meta.socialTitle,
+      description: dict.meta.socialDescription,
       url: `${siteUrl}/${locale}`,
       siteName: company.nameEn,
       locale: locale === "ar" ? "ar_IQ" : "en_US",
       alternateLocale: locale === "ar" ? "en_US" : "ar_IQ",
       type: "website",
-      images: [
-        {
-          url: "/brand/og-default.webp",
-          width: 1200,
-          height: 630,
-          alt: company.nameEn,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: dict.meta.title,
-      description: dict.meta.description,
-      images: ["/brand/og-default.webp"],
+      title: dict.meta.socialTitle,
+      description: dict.meta.socialDescription,
     },
   };
 }
@@ -112,7 +103,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={dict.htmlLang} dir={dict.dir} className={`${fontVars} h-full antialiased`}>
-      <body className="flex min-h-full flex-col pb-16 md:pb-0">
+      <body className="flex min-h-full flex-col pb-[calc(4rem+env(safe-area-inset-bottom))] xl:pb-0">
         <OrganizationJsonLd locale={locale} />
         <Header dict={dict} locale={locale} />
         <main id="main-content" className="flex-1">

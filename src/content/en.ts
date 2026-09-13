@@ -9,6 +9,9 @@ export const en: Dictionary = {
     title: "Plastic Raw Materials Supplier in Erbil | Rieayat Alkhalil",
     description:
       "Rieayat Alkhalil Company imports and supplies plastic raw materials in Erbil, Iraq, with sourcing from Iran, Saudi Arabia, Turkey and China. Request a quote.",
+    socialTitle: "Rieayat Alkhalil Company | Plastic Raw Materials in Erbil",
+    socialDescription:
+      "Rieayat Alkhalil Company imports and supplies plastic raw materials in Erbil, Iraq, with sourcing from Iran, Saudi Arabia, Turkey and China.",
   },
 
   nav: {

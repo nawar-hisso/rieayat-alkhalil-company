@@ -34,6 +34,8 @@ export interface Dictionary {
   meta: {
     title: string;
     description: string;
+    socialTitle: string;
+    socialDescription: string;
   };
 
   nav: {

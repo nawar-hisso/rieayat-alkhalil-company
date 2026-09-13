@@ -102,6 +102,11 @@ body {
   padding-inline: 1.25rem;
 }
 
+/* Keeps anchor targets clear of the sticky header when jumping to a section. */
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 @media (min-width: 768px) {
   .container-brand {
     padding-inline: 2rem;
@@ -114,7 +119,7 @@ body {
   border: 1px solid var(--color-border-warm);
   background: var(--color-pearl-2);
   padding: 0.65rem 0.9rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--color-charcoal);
   transition: border-color 0.15s ease;
 }

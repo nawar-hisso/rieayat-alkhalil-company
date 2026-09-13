@@ -26,21 +26,21 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         <Logo locale={locale} />
 
         <nav
-          className="hidden items-center gap-7 md:flex"
+          className="hidden items-center gap-6 xl:flex xl:gap-7"
           aria-label={dict.nav.menu}
         >
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-charcoal/80 transition-colors hover:text-champagne-deep"
+              className="text-sm font-medium whitespace-nowrap text-charcoal/80 transition-colors hover:text-champagne-deep"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <LocaleSwitch locale={locale} />
           <Link
             href={`/${locale}#quote`}

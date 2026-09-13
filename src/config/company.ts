@@ -4,8 +4,9 @@
  */
 
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://example.com";
-// NOTE: replace NEXT_PUBLIC_SITE_URL with the real production domain before launch.
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "http://localhost:3000";
+// NEXT_PUBLIC_SITE_URL is set in the Netlify site's environment variables to the
+// production domain — the localhost fallback only ever applies to local `next dev`.
 
 export const company = {
   nameAr: "شركة رعاية الخليل",

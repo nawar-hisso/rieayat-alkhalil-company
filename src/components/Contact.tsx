@@ -141,7 +141,7 @@ function ContactCard({
       <span className="min-w-0">
         <span className="block text-xs font-medium text-muted">{label}</span>
         <span
-          className="block truncate text-sm font-semibold text-charcoal"
+          className="block break-words text-sm font-semibold text-charcoal"
           dir={ltr ? "ltr" : undefined}
         >
           {value}
