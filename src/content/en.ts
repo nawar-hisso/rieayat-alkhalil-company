@@ -42,7 +42,7 @@ export const en: Dictionary = {
     eyebrow: "ABOUT",
     heading: "A practical supply partner for the plastics industry.",
     paragraphs: [
-      "Based in Erbil, Rieayat Alkhalil Company connects industrial buyers with plastic raw material sources across regional and international markets.",
+      "Based in Erbil, Rieayat Alkhalil Company connects industrial buyers with plastic raw material sources — plastic resins and polymer granules — across regional and international markets.",
       "Whether you are planning regular production or searching for a specific material or grade, the goal is to make the sourcing conversation straightforward: share your requirement and discuss suitable available supply options.",
     ],
   },

@@ -11,7 +11,7 @@ import "../globals.css";
 import { locales, isLocale, getDictionary } from "@/content";
 import { alternates } from "@/lib/seo";
 import { siteUrl, company } from "@/config/company";
-import { OrganizationJsonLd } from "@/components/JsonLd";
+import { EntityGraphJsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyMobileActions } from "@/components/StickyMobileActions";
@@ -63,11 +63,17 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
 
+  const googleSiteVerification =
+    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || process.env.GOOGLE_SITE_VERIFICATION;
+
   return {
     metadataBase: new URL(siteUrl),
     title: dict.meta.title,
     description: dict.meta.description,
     alternates: alternates(locale),
+    ...(googleSiteVerification && {
+      verification: { google: googleSiteVerification },
+    }),
     openGraph: {
       title: dict.meta.socialTitle,
       description: dict.meta.socialDescription,
@@ -104,7 +110,7 @@ export default async function LocaleLayout({
   return (
     <html lang={dict.htmlLang} dir={dict.dir} className={`${fontVars} h-full antialiased`}>
       <body className="flex min-h-full flex-col pb-[calc(4rem+env(safe-area-inset-bottom))] xl:pb-0">
-        <OrganizationJsonLd locale={locale} />
+        <EntityGraphJsonLd locale={locale} dict={dict} />
         <Header dict={dict} locale={locale} />
         <main id="main-content" className="flex-1">
           {children}

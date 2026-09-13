@@ -14,8 +14,10 @@ export const company = {
   nameEnPublic: "Rieayat Alkhalil Company Erbil",
   wordmark: "ALKHALIL COMPANY",
 
-  descriptionAr: "استيراد وبيع مواد أولية بلاستيكية",
-  descriptionEn: "Plastic raw materials importing and supply company based in Erbil, Iraq.",
+  descriptionAr:
+    "شركة رعاية الخليل مورّد ومستورد للمواد الأولية البلاستيكية (خامات وحبيبات البلاستيك) في أربيل، العراق.",
+  descriptionEn:
+    "Rieayat Alkhalil Company is a plastic raw materials importer and supplier, sourcing plastic resins and polymers for industrial buyers in Erbil, Iraq.",
 
   city: "Erbil",
   cityAr: "أربيل",
@@ -52,6 +54,18 @@ export const company = {
     timeAr: "10:20 صباحاً – 6:00 مساءً",
     fridayEn: "Friday: Closed",
     fridayAr: "الجمعة: مغلق",
+    // Raw values for structured data (openingHoursSpecification) — keep in sync
+    // with the display strings above if hours ever change.
+    opens: "10:20",
+    closes: "18:00",
+    openDays: [
+      "Saturday",
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+    ] as const,
   },
 } as const;
 
